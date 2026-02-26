@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plan Infinity Inc. — AI & Cloud Solutions</title>
+<meta name="description" content="Plan Infinity Inc. — Your trusted AI-powered IT & Cloud Solutions partner. AWS, Azure, GCP, AI/ML, Cybersecurity, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<style>
+/* ============================================================
+   CSS VARIABLES & RESET
+   ============================================================ */
+:root {
+  --bg: #050a14;
+  --bg2: #080f1e;
+  --surface: rgba(255,255,255,0.04);
+  --surface2: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --border-active: rgba(0,212,255,0.4);
+  --cyan: #00d4ff;
+  --cyan2: #0096e6;
+  --purple: #7b5ea7;
+  --green: #00e5a0;
+  --orange: #ff6b35;
+  --text: #e8edf5;
+  --text2: #8a9bb5;
+  --text3: #5a6a80;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 16px;
+  --radius-sm: 8px;
+  --glow: 0 0 40px rgba(0,212,255,0.15);
+  --glow-strong: 0 0 80px rgba(0,212,255,0.25);
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--cyan2); border-radius: 3px; }
+
+/* ============================================================
+   NOISE TEXTURE OVERLAY
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ============================================================
+   REUSABLE
+   ============================================================ */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+
+.section { padding: 120px 0; }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.2);
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 72px;
+}
+.section-head h2 {
+  font-family: var(--font-head);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.section-head p {
+  font-size: 18px;
+  color: var(--text2);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.grad-text {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.grad-text-green {
+  background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  padding: 14px 28px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan2) 100%);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,212,255,0.4);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+.btn-ghost:hover {
+  background: rgba(0,212,255,0.1);
+  border-color: var(--border-active);
+  color: var(--cyan);
+}
+.btn-paypal {
+  background: linear-gradient(135deg, #003087, #009cde);
+  color: #fff;
+  font-size: 16px;
+  padding: 16px 36px;
+}
+.btn-paypal:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,156,222,0.4);
+}
+
+/* Card base */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: rgba(0,212,255,0.2);
+  background: var(--surface2);
+  transform: translateY(-4px);
+  box-shadow: var(--glow);
+}
+.card:hover::before { opacity: 1; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0;
+  transition: var(--transition);
+}
+#nav.scrolled {
+  background: rgba(5,10,20,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.nav-logo {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--cyan), var(--cyan2));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--bg);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text2);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+.nav-links a:hover {
+  color: var(--text);
+  background: var(--surface2);
+}
+.nav-cta { margin-left: 16px; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* Mobile nav */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 72px; left: 0; right: 0;
+  background: rgba(5,10,20,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px;
+  z-index: 999;
+  flex-direction: column;
+  gap: 4px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  color: var(--text2);
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: var(--transition);
+}
+.mobile-nav a:hover { background: var(--surface2); color: var(--text); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,150,230,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 40% at 90% 80%, rgba(123,94,167,0.1) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 50% at 0% 50%, rgba(0,229,160,0.05) 0%, transparent 60%);
+}
+
+/* Animated grid */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 0%, black 30%, transparent 80%);
+}
+
+/* Floating orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float 8s ease-in-out infinite;
+}
+.orb-1 { width: 400px; height: 400px; background: rgba(0,212,255,0.07); top: -100px; right: -100px; animation-delay: 0s; }
+.orb-2 { width: 300px; height: 300px; background: rgba(123,94,167,0.08); bottom: 100px; left: -50px; animation-delay: 3s; }
+.orb-3 { width: 200px; height: 200px; background: rgba(0,229,160,0.06); top: 40%; right: 20%; animation-delay: 5s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 100px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  background: rgba(0,212,255,0.06);
+  border: 1px solid rgba(0,212,255,0.15);
+  padding: 8px 16px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+  animation: fadeInUp 0.8s ease both;
+}
+.hero-badge .dot {
+  width: 6px; height: 6px;
+  background: var(--cyan);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.hero-h1 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(42px, 7vw, 88px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  animation: fadeInUp 0.8s 0.1s ease both;
+}
+
+.hero-sub {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--text2);
+  max-width: 580px;
+  margin-bottom: 48px;
+  line-height: 1.6;
+  animation: fadeInUp 0.8s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+  animation: fadeInUp 0.8s 0.3s ease both;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s 0.4s ease both;
+}
+.stat-item { }
+.stat-num {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 36px;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-num span { color: var(--cyan); }
+.stat-label { font-size: 13px; color: var(--text3); }
+
+/* Tech stack pills */
+.hero-tech {
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeInRight 1s 0.5s ease both;
+}
+.tech-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--text2);
+  backdrop-filter: blur(12px);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.tech-pill:hover { border-color: var(--border-active); color: var(--cyan); background: var(--surface2); }
+.tech-pill i { font-size: 14px; color: var(--cyan); width: 16px; text-align: center; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translate(24px, -50%); }
+  to { opacity: 1; transform: translate(0, -50%); }
+}
+
+/* ============================================================
+   PARTNERS / LOGOS STRIP
+   ============================================================ */
+#partners {
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.partners-label {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 32px;
+}
+.partners-track {
+  display: flex;
+  gap: 48px;
+  animation: scroll 30s linear infinite;
+  width: max-content;
+}
+.partners-track:hover { animation-play-state: paused; }
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.partner-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text3);
+  white-space: nowrap;
+  transition: var(--transition);
+  padding: 8px 0;
+}
+.partner-logo:hover { color: var(--text2); }
+.partner-logo i { font-size: 20px; color: var(--cyan); opacity: 0.6; }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#about {
+  background: var(--bg2);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-img-wrap {
+  position: relative;
+}
+.about-img-wrap img {
+  width: 100%;
+  border-radius: var(--radius);
+  display: block;
+  filter: grayscale(20%);
+}
+.about-img-badge {
+  position: absolute;
+  bottom: 24px;
+  right: -24px;
+  background: var(--surface2);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.about-img-badge .num {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--cyan);
+  line-height: 1;
+}
+.about-img-badge .lbl {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+.about-text h2 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(28px, 3vw, 42px);
+  margin-bottom: 20px;
+  line-height: 1.15;
+}
+.about-text p {
+  color: var(--text2);
+  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.about-bullets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.about-bullet {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text2);
+}
+.about-bullet i {
+  color: var(--green);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+#services { }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+.service-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  transform: scaleX(0);
+  transition: var(--transition);
+  transform-origin: left;
+}
+.service-card:hover {
+  border-color: rgba(0,212,255,0.2);
+  background: var(--surface2);
+  transform: translateY(-6px);
+  box-shadow: var(--glow);
+}
+.service-card:hover::after { transform: scaleX(1); }
+
+.service-icon {
+  width: 56px; height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 24px;
+  position: relative;
+}
+.service-icon.cyan { background: rgba(0,212,255,0.1); color: var(--cyan); }
+.service-icon.purple { background: rgba(123,94,167,0.15); color: var(--purple); }
+.service-icon.green { background: rgba(0,229,160,0.1); color: var(--green); }
+.service-icon.orange { background: rgba(255,107,53,0.1); color: var(--orange); }
+
+.service-card h3 {
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.service-card p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+.stag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--text3);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+/* ============================================================
+   AI SECTION
+   ============================================================ */
+#ai-offerings {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%);
+  position: relative;
+  overflow: hidden;
+}
+#ai-offerings::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, rgba(0,212,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ai-hero-text {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 80px;
+}
+.ai-hero-text h2 {
+  font-family: var(--font-head);
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.ai-hero-text p { font-size: 18px; color: var(--text2); }
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 80px;
+}
+@media (max-width: 1024px) { .ai-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .ai-grid { grid-template-columns: 1fr; } }
+
+.ai-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: var(--transition);
+  position: relative;
+}
+.ai-card:hover {
+  border-color: rgba(0,212,255,0.25);
+  background: var(--surface2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3), var(--glow);
+}
+.ai-card-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  display: block;
+}
+.ai-card h4 {
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.ai-card p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* AI Models Grid */
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.model-badge {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+  transition: var(--transition);
+  cursor: default;
+}
+.model-badge:hover {
+  border-color: var(--border-active);
+  background: var(--surface2);
+}
+.model-badge .model-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+.model-badge .model-name { font-family: var(--font-mono); font-size: 12px; color: var(--cyan); font-weight: 500; }
+.model-badge .model-provider { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* ============================================================
+   CLOUD & AWS
+   ============================================================ */
+#cloud {
+  background: var(--bg2);
+}
+
+.cloud-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 48px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cloud-tab {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  color: var(--text2);
+  background: transparent;
+  transition: var(--transition);
+}
+.cloud-tab.active {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan2));
+  color: var(--bg);
+}
+.cloud-tab:hover:not(.active) { color: var(--text); }
+
+.cloud-panel { display: none; }
+.cloud-panel.active { display: block; }
+
+.cloud-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.cloud-service-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: var(--transition);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.cloud-service-item:hover {
+  border-color: rgba(0,212,255,0.2);
+  background: var(--surface2);
+}
+.cloud-service-item .csi-icon {
+  width: 40px; height: 40px;
+  background: rgba(0,212,255,0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.cloud-service-item h4 { font-family: var(--font-head); font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.cloud-service-item p { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+/* Partner badges row */
+.partner-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 60px;
+}
+.partner-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 24px;
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text2);
+  transition: var(--transition);
+}
+.partner-badge i { font-size: 20px; }
+.partner-badge:hover { border-color: var(--border-active); color: var(--text); background: var(--surface2); }
+.partner-badge.aws { }
+.partner-badge.aws i { color: #ff9900; }
+.partner-badge.azure i { color: #0078d4; }
+.partner-badge.gcp i { color: #4285f4; }
+.partner-badge.openai i { color: #10a37f; }
+.partner-badge.anthropic i { color: #cc785c; }
+.partner-badge.databricks i { color: #ff3621; }
+.partner-badge.nvidia i { color: #76b900; }
+.partner-badge.sf i { color: #00a1e0; }
+.partner-badge.hf i { color: #ffbd59; }
+
+/* ============================================================
+   PROCESS / HOW WE WORK
+   ============================================================ */
+#process {
+  position: relative;
+}
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.process-steps::after {
+  content: '';
+  position: absolute;
+  top: 32px; left: 12.5%;
+  width: 75%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple), var(--cyan));
+  opacity: 0.3;
+}
+@media (max-width: 768px) {
+  .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .process-steps::after { display: none; }
+}
+
+.process-step {
+  padding: 0 24px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.step-num {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--bg2);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--cyan);
+  margin: 0 auto 24px;
+  transition: var(--transition);
+}
+.process-step:hover .step-num {
+  background: rgba(0,212,255,0.1);
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(0,212,255,0.2);
+}
+.process-step h4 { font-family: var(--font-head); font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.process-step p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ============================================================
+   TECHNOLOGIES
+   ============================================================ */
+#technologies {
+  background: var(--bg2);
+}
+.tech-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.tech-category h4 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tech-category h4::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tech-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--text2);
+  transition: var(--transition);
+  cursor: default;
+}
+.tech-chip:hover {
+  border-color: var(--border-active);
+  color: var(--cyan);
+  background: rgba(0,212,255,0.06);
+}
+.tech-chip i { font-size: 14px; color: var(--cyan); }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+#testimonials {}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+.testimonial-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+  transition: var(--transition);
+  position: relative;
+}
+.testimonial-card:hover { border-color: rgba(0,212,255,0.15); background: var(--surface2); }
+.testimonial-card .quote-icon {
+  font-size: 48px;
+  color: var(--cyan);
+  opacity: 0.2;
+  line-height: 1;
+  margin-bottom: 16px;
+  font-family: Georgia, serif;
+}
+.testimonial-card p {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.testimonial-author img {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-active);
+}
+.author-name { font-family: var(--font-head); font-size: 15px; font-weight: 700; }
+.author-role { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.stars { color: #f59e0b; font-size: 12px; margin-bottom: 4px; }
+
+/* ============================================================
+   PAYMENTS
+   ============================================================ */
+#payments {
+  background: var(--bg2);
+  position: relative;
+  overflow: hidden;
+}
+#payments::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(0,48,135,0.15) 0%, transparent 70%);
+}
+
+.payments-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.payments-info h2 {
+  font-family: var(--font-head);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.15;
+}
+.payments-info p {
+  color: var(--text2);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+.payment-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.payment-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text2);
+}
+.payment-feature i { color: var(--green); font-size: 14px; width: 16px; }
+
+.payment-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.payment-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #003087, #009cde, #012169);
+}
+.paypal-logo {
+  font-family: var(--font-head);
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.paypal-logo span:first-child { color: #003087; }
+.paypal-logo span:last-child { color: #009cde; }
+.payment-card .payment-desc {
+  color: var(--text2);
+  font-size: 14px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+.payment-card .payment-email {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--cyan);
+  background: rgba(0,212,255,0.06);
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: 8px;
+  padding: 10px 16px;
+  display: inline-block;
+  margin-bottom: 28px;
+  word-break: break-all;
+}
+.accepted-methods {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.method-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--text3);
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+#contact {
+  position: relative;
+}
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+.contact-info h2 {
+  font-family: var(--font-head);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.15;
+}
+.contact-info > p {
+  color: var(--text2);
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.contact-detail {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.cd-icon {
+  width: 44px; height: 44px;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.cd-text .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; margin-bottom: 4px; }
+.cd-text .value { font-size: 14px; color: var(--text); font-weight: 500; }
+
+.social-links {
+  display: flex;
+  gap: 12px;
+}
+.social-link {
+  width: 44px; height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text2);
+  font-size: 16px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.social-link:hover {
+  background: rgba(0,212,255,0.08);
+  border-color: var(--border-active);
+  color: var(--cyan);
+}
+
+/* Contact Form */
+.contact-form-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px;
+}
+.contact-form-wrap h3 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 8px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: var(--transition);
+  -webkit-appearance: none;
+}
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238a9bb5' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--text3); }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: var(--cyan);
+  background: rgba(0,212,255,0.03);
+  box-shadow: 0 0 0 3px rgba(0,212,255,0.08);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group option { background: #0d1525; color: var(--text); }
+
+.recaptcha-wrap {
+  margin: 20px 0;
+  transform: scale(0.95);
+  transform-origin: left;
+}
+.form-note {
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  margin-top: 12px;
+}
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 24px;
+  background: rgba(0,229,160,0.06);
+  border: 1px solid rgba(0,229,160,0.2);
+  border-radius: var(--radius-sm);
+  color: var(--green);
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 80px 0 40px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 60px;
+}
+.footer-brand .nav-logo {
+  margin-bottom: 16px;
+  display: inline-flex;
+}
+.footer-brand p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 280px;
+  margin-bottom: 24px;
+}
+.footer-col h5 {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-col ul li a {
+  font-size: 14px;
+  color: var(--text2);
+  text-decoration: none;
+  transition: var(--transition);
+}
+.footer-col ul li a:hover { color: var(--cyan); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-bottom p { font-size: 13px; color: var(--text3); }
+.footer-bottom a { color: var(--text2); text-decoration: none; }
+.footer-bottom a:hover { color: var(--cyan); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .hero-tech { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-img-badge { right: 16px; }
+  .payments-layout { grid-template-columns: 1fr; gap: 48px; }
+  .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .process-steps::after { display: none; }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .section { padding: 80px 0; }
+  .footer-top { grid-template-columns: 1fr; gap: 40px; }
+  .form-row { grid-template-columns: 1fr; }
+  .hero-stats { gap: 32px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   ANIMATIONS / INTERSECTION OBSERVER CLASSES
+   ============================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+.fade-in-delay-4 { transition-delay: 0.4s; }
+
+/* ============================================================
+   GLOW DIVIDERS
+   ============================================================ */
+.glow-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0.2;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ NAV ============================================================ -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <div class="nav-logo-icon"><i class="fa fa-infinity"></i></div>
+        Plan Infinity Inc.
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#ai-offerings">AI</a></li>
+        <li><a href="#cloud">Cloud</a></li>
+        <li><a href="#technologies">Technologies</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#payments">Payments</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-primary nav-cta">Get Started</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#services" class="mobile-link">Services</a>
+    <a href="#ai-offerings" class="mobile-link">AI Offerings</a>
+    <a href="#cloud" class="mobile-link">Cloud & AWS</a>
+    <a href="#technologies" class="mobile-link">Technologies</a>
+    <a href="#testimonials" class="mobile-link">Testimonials</a>
+    <a href="#payments" class="mobile-link">Payments</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+  </div>
+</nav>
+
+<!-- ============================================================ HERO ============================================================ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="container-wide" style="width:100%; position:relative; z-index:1;">
+    <div style="display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center;">
+      <div class="hero-content">
+        <div class="hero-badge"><span class="dot"></span> Now offering GPT-4o, Claude & Gemini integrations</div>
+        <h1 class="hero-h1">
+          The AI-First<br>
+          <span class="grad-text">IT Consultancy</span><br>
+          For Modern Business
+        </h1>
+        <p class="hero-sub">
+          Plan Infinity Inc. delivers enterprise-grade AI, cloud, and digital transformation solutions. From AWS & Azure to GenAI apps — we build what's next.
+        </p>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary"><i class="fa fa-rocket"></i> Explore Services</a>
+          <a href="#contact" class="btn btn-ghost"><i class="fa fa-comments"></i> Talk to an Expert</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="stat-num">50<span>+</span></div><div class="stat-label">Projects Delivered</div></div>
+          <div class="stat-item"><div class="stat-num">98<span>%</span></div><div class="stat-label">Client Satisfaction</div></div>
+          <div class="stat-item"><div class="stat-num">10<span>+</span></div><div class="stat-label">Cloud Platforms</div></div>
+          <div class="stat-item"><div class="stat-num">24<span>/7</span></div><div class="stat-label">Support Coverage</div></div>
+        </div>
+      </div>
+      <div class="hero-tech">
+        <div class="tech-pill"><i class="fa-brands fa-aws"></i> AWS Partner</div>
+        <div class="tech-pill"><i class="fa-brands fa-microsoft"></i> Azure Certified</div>
+        <div class="tech-pill"><i class="fa-brands fa-google"></i> GCP Partner</div>
+        <div class="tech-pill"><i class="fa fa-brain"></i> OpenAI GPT-4o</div>
+        <div class="tech-pill"><i class="fa fa-robot"></i> Claude Sonnet</div>
+        <div class="tech-pill"><i class="fa fa-fire"></i> Gemini Ultra</div>
+        <div class="tech-pill"><i class="fa-brands fa-docker"></i> Kubernetes</div>
+        <div class="tech-pill"><i class="fa fa-database"></i> Vector DBs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PARTNERS ============================================================ -->
+<section id="partners">
+  <div class="container">
+    <p class="partners-label">Trusted by teams using the world's leading platforms</p>
+  </div>
+  <div style="overflow:hidden;">
+    <div class="partners-track">
+      <div class="partner-logo"><i class="fa-brands fa-aws"></i> Amazon Web Services</div>
+      <div class="partner-logo"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</div>
+      <div class="partner-logo"><i class="fa-brands fa-google"></i> Google Cloud</div>
+      <div class="partner-logo"><i class="fa fa-brain"></i> OpenAI</div>
+      <div class="partner-logo"><i class="fa fa-robot"></i> Anthropic</div>
+      <div class="partner-logo"><i class="fa-brands fa-salesforce"></i> Salesforce</div>
+      <div class="partner-logo"><i class="fa fa-database"></i> Databricks</div>
+      <div class="partner-logo"><i class="fa fa-microchip"></i> NVIDIA</div>
+      <div class="partner-logo"><i class="fa-brands fa-docker"></i> Docker / K8s</div>
+      <div class="partner-logo"><i class="fa-brands fa-github"></i> GitHub Copilot</div>
+      <!-- duplicate for infinite scroll -->
+      <div class="partner-logo"><i class="fa-brands fa-aws"></i> Amazon Web Services</div>
+      <div class="partner-logo"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</div>
+      <div class="partner-logo"><i class="fa-brands fa-google"></i> Google Cloud</div>
+      <div class="partner-logo"><i class="fa fa-brain"></i> OpenAI</div>
+      <div class="partner-logo"><i class="fa fa-robot"></i> Anthropic</div>
+      <div class="partner-logo"><i class="fa-brands fa-salesforce"></i> Salesforce</div>
+      <div class="partner-logo"><i class="fa fa-database"></i> Databricks</div>
+      <div class="partner-logo"><i class="fa fa-microchip"></i> NVIDIA</div>
+      <div class="partner-logo"><i class="fa-brands fa-docker"></i> Docker / K8s</div>
+      <div class="partner-logo"><i class="fa-brands fa-github"></i> GitHub Copilot</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ ABOUT ============================================================ -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-in">
+        <img src="./Plan Infinity Inc._files/about.jpg" alt="Plan Infinity Office" loading="lazy">
+        <div class="about-img-badge">
+          <div>
+            <div class="num">5+</div>
+          </div>
+          <div class="lbl">Years of<br>Excellence</div>
+        </div>
+      </div>
+      <div class="about-text fade-in fade-in-delay-1">
+        <div class="tag"><i class="fa fa-building"></i> Who We Are</div>
+        <h2>Where Innovation Meets <span class="grad-text">Excellence</span></h2>
+        <p>Welcome to Plan Infinity, a next-generation IT consultancy where AI, cloud, and engineering converge. We envision a world where technology empowers businesses to reach unprecedented heights — and we build the tools to get there.</p>
+        <p>What sets us apart is our unwavering commitment to results. We take a hyper-personalized approach to every engagement, collaborating closely with clients to ensure our solutions align perfectly with strategic objectives and deliver measurable ROI.</p>
+        <div class="about-bullets">
+          <div class="about-bullet"><i class="fa fa-check-circle"></i> Full-spectrum IT services</div>
+          <div class="about-bullet"><i class="fa fa-check-circle"></i> AI-first methodology</div>
+          <div class="about-bullet"><i class="fa fa-check-circle"></i> Deep cloud expertise</div>
+          <div class="about-bullet"><i class="fa fa-check-circle"></i> Cost-effective solutions</div>
+          <div class="about-bullet"><i class="fa fa-check-circle"></i> Proactive risk management</div>
+          <div class="about-bullet"><i class="fa fa-check-circle"></i> Elastic scalability</div>
+          <div class="about-bullet"><i class="fa fa-check-circle"></i> Continuous innovation</div>
+          <div class="about-bullet"><i class="fa fa-check-circle"></i> 24/7 managed support</div>
+        </div>
+        <a href="#contact" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Partner With Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ============================================================ SERVICES ============================================================ -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="tag"><i class="fa fa-cubes"></i> What We Do</div>
+      <h2>End-to-End IT <span class="grad-text">Services</span></h2>
+      <p>From web apps to enterprise AI systems, we deliver across the entire technology stack.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card fade-in">
+        <div class="service-icon cyan"><i class="fa fa-code"></i></div>
+        <h3>Web & Mobile App Development</h3>
+        <p>Custom, performant web and mobile applications built with modern frameworks. React, Next.js, React Native, Flutter — from MVP to enterprise scale.</p>
+        <div class="service-tags">
+          <span class="stag">React</span><span class="stag">Next.js</span><span class="stag">Flutter</span><span class="stag">Node.js</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in fade-in-delay-1">
+        <div class="service-icon purple"><i class="fa fa-chart-bar"></i></div>
+        <h3>Data Management & Analytics</h3>
+        <p>Unlock the full potential of your data. We architect data lakes, pipelines, and real-time dashboards that turn raw data into competitive intelligence.</p>
+        <div class="service-tags">
+          <span class="stag">Snowflake</span><span class="stag">dbt</span><span class="stag">Spark</span><span class="stag">Tableau</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in fade-in-delay-2">
+        <div class="service-icon green"><i class="fa fa-laptop-code"></i></div>
+        <h3>Custom Software Development</h3>
+        <p>Tailor-made solutions that perfectly align with your business goals. Our engineers build scalable, maintainable software that gives you a competitive edge.</p>
+        <div class="service-tags">
+          <span class="stag">Python</span><span class="stag">Go</span><span class="stag">Java</span><span class="stag">Microservices</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon orange"><i class="fa fa-comments"></i></div>
+        <h3>IT Consulting & Strategy</h3>
+        <p>Strategic technology advisory to align your IT roadmap with business objectives. Digital transformation planning, architecture reviews, and technology due diligence.</p>
+        <div class="service-tags">
+          <span class="stag">Architecture</span><span class="stag">Roadmapping</span><span class="stag">Governance</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in fade-in-delay-1">
+        <div class="service-icon cyan"><i class="fa fa-cloud"></i></div>
+        <h3>Cloud Solutions</h3>
+        <p>Cloud migration, optimization, and multi-cloud strategy across AWS, Azure, and GCP. Whether you need lift-and-shift or cloud-native rebuilds, we deliver with precision.</p>
+        <div class="service-tags">
+          <span class="stag">AWS</span><span class="stag">Azure</span><span class="stag">GCP</span><span class="stag">Terraform</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in fade-in-delay-2">
+        <div class="service-icon purple"><i class="fa fa-shield-halved"></i></div>
+        <h3>Cybersecurity</h3>
+        <p>Comprehensive security services including threat assessments, SOC setup, zero-trust architecture, penetration testing, and compliance consulting (SOC2, HIPAA, ISO27001).</p>
+        <div class="service-tags">
+          <span class="stag">Zero Trust</span><span class="stag">SOC2</span><span class="stag">SIEM</span><span class="stag">PenTest</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon green"><i class="fa fa-headset"></i></div>
+        <h3>IT Support & Helpdesk</h3>
+        <p>Tailor-made support solutions for your infrastructure and business processes. We support and manage Business Processes, SaaS, PaaS, IaaS, and hybrid environments.</p>
+        <div class="service-tags">
+          <span class="stag">L1/L2/L3</span><span class="stag">ServiceNow</span><span class="stag">Jira</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in fade-in-delay-1">
+        <div class="service-icon orange"><i class="fa fa-gears"></i></div>
+        <h3>Managed IT Services</h3>
+        <p>Proactive monitoring, patch management, and performance optimization. Our managed services guarantee uptime and let your team focus on core business activities.</p>
+        <div class="service-tags">
+          <span class="stag">24/7 NOC</span><span class="stag">AIOps</span><span class="stag">SLA-backed</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in fade-in-delay-2">
+        <div class="service-icon cyan"><i class="fa fa-infinity"></i></div>
+        <h3>DevOps & MLOps</h3>
+        <p>Streamline development and model deployment with end-to-end CI/CD pipelines, infrastructure as code, container orchestration, and model versioning.</p>
+        <div class="service-tags">
+          <span class="stag">GitHub Actions</span><span class="stag">ArgoCD</span><span class="stag">MLflow</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon purple"><i class="fa fa-plug"></i></div>
+        <h3>API & Integration Services</h3>
+        <p>Seamless system integrations using REST, GraphQL, and event-driven architectures. We connect your SaaS tools, ERPs, CRMs, and custom systems effortlessly.</p>
+        <div class="service-tags">
+          <span class="stag">REST/GraphQL</span><span class="stag">Kafka</span><span class="stag">MuleSoft</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in fade-in-delay-1">
+        <div class="service-icon green"><i class="fa fa-database"></i></div>
+        <h3>Database Engineering</h3>
+        <p>Design, migration, and optimization of relational, NoSQL, and vector databases. From PostgreSQL to Pinecone, we ensure your data layer is rock-solid.</p>
+        <div class="service-tags">
+          <span class="stag">PostgreSQL</span><span class="stag">MongoDB</span><span class="stag">Redis</span><span class="stag">Pinecone</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in fade-in-delay-2">
+        <div class="service-icon orange"><i class="fa fa-graduation-cap"></i></div>
+        <h3>Training & Enablement</h3>
+        <p>Upskill your team with customized AI and cloud training programs. From hands-on workshops to executive AI literacy sessions — we make your team AI-ready.</p>
+        <div class="service-tags">
+          <span class="stag">AI Literacy</span><span class="stag">Cloud Training</span><span class="stag">Workshops</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ============================================================ AI OFFERINGS ============================================================ -->
+<section id="ai-offerings" class="section">
+  <div class="container">
+    <div class="ai-hero-text fade-in">
+      <div class="tag"><i class="fa fa-brain"></i> AI Center of Excellence</div>
+      <h2><span class="grad-text">Artificial Intelligence</span> &amp;<br>Machine Learning Services</h2>
+      <p>We deliver the full AI stack — from LLM integrations and RAG pipelines to custom model training and production MLOps. Every AI solution is built for real business impact.</p>
+    </div>
+
+    <div class="ai-grid">
+      <div class="ai-card fade-in">
+        <span class="ai-card-icon">🤖</span>
+        <h4>Generative AI Integration</h4>
+        <p>Embed GPT-4o, Claude, Gemini, and Llama into your products. Custom prompting, fine-tuning, and safety guardrails included.</p>
+      </div>
+      <div class="ai-card fade-in fade-in-delay-1">
+        <span class="ai-card-icon">🔍</span>
+        <h4>RAG & Knowledge Systems</h4>
+        <p>Retrieval-Augmented Generation systems that let your AI search, reason over, and answer questions from your private knowledge base.</p>
+      </div>
+      <div class="ai-card fade-in fade-in-delay-2">
+        <span class="ai-card-icon">🧠</span>
+        <h4>Custom LLM Fine-tuning</h4>
+        <p>Domain-specific model fine-tuning using LoRA, QLoRA, RLHF, and DPO techniques on your proprietary data.</p>
+      </div>
+      <div class="ai-card fade-in fade-in-delay-3">
+        <span class="ai-card-icon">🤝</span>
+        <h4>AI Agents & Automation</h4>
+        <p>Autonomous multi-agent systems with tool use, memory, and planning capabilities that automate complex multi-step workflows.</p>
+      </div>
+      <div class="ai-card fade-in">
+        <span class="ai-card-icon">📊</span>
+        <h4>ML Model Development</h4>
+        <p>End-to-end ML pipelines including feature engineering, model selection, hyperparameter tuning, and A/B testing frameworks.</p>
+      </div>
+      <div class="ai-card fade-in fade-in-delay-1">
+        <span class="ai-card-icon">👁️</span>
+        <h4>Computer Vision</h4>
+        <p>Object detection, image classification, OCR, video analytics, and real-time visual AI systems for industrial and commercial use.</p>
+      </div>
+      <div class="ai-card fade-in fade-in-delay-2">
+        <span class="ai-card-icon">🗣️</span>
+        <h4>NLP & Conversational AI</h4>
+        <p>Sentiment analysis, entity extraction, text classification, document processing, and production-grade chatbots and voice assistants.</p>
+      </div>
+      <div class="ai-card fade-in fade-in-delay-3">
+        <span class="ai-card-icon">🔮</span>
+        <h4>Predictive Analytics</h4>
+        <p>Forecasting, anomaly detection, churn prediction, recommendation engines, and real-time scoring systems for data-driven decision making.</p>
+      </div>
+      <div class="ai-card fade-in">
+        <span class="ai-card-icon">🛡️</span>
+        <h4>AI Safety & Governance</h4>
+        <p>Responsible AI frameworks, bias auditing, explainability (XAI), model monitoring, and compliance with EU AI Act and NIST guidelines.</p>
+      </div>
+      <div class="ai-card fade-in fade-in-delay-1">
+        <span class="ai-card-icon">⚡</span>
+        <h4>AI Infrastructure & MLOps</h4>
+        <p>Scalable ML platforms on AWS SageMaker, Azure ML, Vertex AI. Model registry, feature stores, CI/CD for models, and drift detection.</p>
+      </div>
+      <div class="ai-card fade-in fade-in-delay-2">
+        <span class="ai-card-icon">🏭</span>
+        <h4>AI for Industry</h4>
+        <p>Vertical AI solutions for healthcare, finance, retail, manufacturing, and legal — pre-built with domain expertise and compliance baked in.</p>
+      </div>
+      <div class="ai-card fade-in fade-in-delay-3">
+        <span class="ai-card-icon">📱</span>
+        <h4>AI-Powered Products</h4>
+        <p>Full-product development with AI as a first-class feature — from ideation to launch, including AI UX design and ethical review.</p>
+      </div>
+    </div>
+
+    <div class="section-head fade-in" style="margin-top:80px; margin-bottom:40px;">
+      <div class="tag"><i class="fa fa-microchip"></i> AI Models We Work With</div>
+      <h2 style="font-size:clamp(24px,3vw,36px);">Partnered With Every <span class="grad-text">Foundation Model</span></h2>
+    </div>
+    <div class="models-grid">
+      <div class="model-badge fade-in"><span class="model-icon">🧠</span><div class="model-name">GPT-4o / o1</div><div class="model-provider">OpenAI</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">🤖</span><div class="model-name">Claude 3.5 Sonnet</div><div class="model-provider">Anthropic</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">✨</span><div class="model-name">Gemini Ultra</div><div class="model-provider">Google DeepMind</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">🦙</span><div class="model-name">Llama 3.1 405B</div><div class="model-provider">Meta AI</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">🔥</span><div class="model-name">Mistral Large</div><div class="model-provider">Mistral AI</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">🌊</span><div class="model-name">Command R+</div><div class="model-provider">Cohere</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">🎯</span><div class="model-name">Titan / Bedrock</div><div class="model-provider">Amazon AWS</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">🔷</span><div class="model-name">Phi-3 / Copilot</div><div class="model-provider">Microsoft</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">🟢</span><div class="model-name">DBRX</div><div class="model-provider">Databricks</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">⚡</span><div class="model-name">Stable Diffusion</div><div class="model-provider">Stability AI</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">🎨</span><div class="model-name">DALL-E 3</div><div class="model-provider">OpenAI</div></div>
+      <div class="model-badge fade-in"><span class="model-icon">🟣</span><div class="model-name">Falcon 180B</div><div class="model-provider">TII</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ============================================================ CLOUD & AWS ============================================================ -->
+<section id="cloud" class="section">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="tag"><i class="fa fa-cloud"></i> Cloud Expertise</div>
+      <h2>Multi-Cloud <span class="grad-text-green">Solutions</span> &amp; Partnerships</h2>
+      <p>Certified across every major cloud platform. We architect, migrate, and optimize your cloud infrastructure for performance, security, and cost.</p>
+    </div>
+
+    <div class="cloud-tabs fade-in">
+      <button class="cloud-tab active" onclick="switchTab('aws', this)"><i class="fa-brands fa-aws"></i> AWS</button>
+      <button class="cloud-tab" onclick="switchTab('azure', this)"><i class="fa-brands fa-microsoft"></i> Azure</button>
+      <button class="cloud-tab" onclick="switchTab('gcp', this)"><i class="fa-brands fa-google"></i> Google Cloud</button>
+      <button class="cloud-tab" onclick="switchTab('multi', this)"><i class="fa fa-layer-group"></i> Multi-Cloud</button>
+    </div>
+
+    <!-- AWS Panel -->
+    <div class="cloud-panel active" id="panel-aws">
+      <div class="cloud-services-grid">
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-server"></i></div><div><h4>EC2 & Auto Scaling</h4><p>Right-sized compute with intelligent auto-scaling groups and reserved instance optimization.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-bolt"></i></div><div><h4>Lambda & Serverless</h4><p>Event-driven serverless architectures with API Gateway, SQS, and Step Functions.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-database"></i></div><div><h4>RDS / Aurora / DynamoDB</h4><p>Managed database services with high availability, global tables, and PITR backups.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-brain"></i></div><div><h4>SageMaker & Bedrock</h4><p>End-to-end ML platform and foundation model access for enterprise AI at scale.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-network-wired"></i></div><div><h4>VPC & Networking</h4><p>Secure multi-AZ network architectures with Transit Gateway, PrivateLink, and WAF.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-shield-halved"></i></div><div><h4>Security Hub & GuardDuty</h4><p>Unified security posture management with automated threat detection and response.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-chart-line"></i></div><div><h4>CloudWatch & X-Ray</h4><p>Full observability stack with metrics, logs, traces, and intelligent anomaly detection.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-boxes-stacked"></i></div><div><h4>ECS / EKS / Fargate</h4><p>Container orchestration at any scale — from simple ECS tasks to production Kubernetes clusters.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-globe"></i></div><div><h4>CloudFront & Route 53</h4><p>Global CDN and intelligent DNS routing for ultra-low latency content delivery worldwide.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-dollar-sign"></i></div><div><h4>Cost Optimization</h4><p>FinOps practices, Savings Plans, Spot Instances, and rightsizing recommendations to slash cloud bills.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-arrows-rotate"></i></div><div><h4>Cloud Migration</h4><p>6 R's migration framework execution — rehost, replatform, refactor, and modernize legacy systems.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-file-code"></i></div><div><h4>Infrastructure as Code</h4><p>Terraform, AWS CDK, and CloudFormation for reproducible, version-controlled infrastructure.</p></div></div>
+      </div>
+    </div>
+
+    <!-- Azure Panel -->
+    <div class="cloud-panel" id="panel-azure">
+      <div class="cloud-services-grid">
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(0,120,212,0.1);color:#0078d4;"><i class="fa fa-brain"></i></div><div><h4>Azure OpenAI Service</h4><p>Enterprise-grade GPT-4, DALL-E, and Whisper deployments with data privacy guarantees.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(0,120,212,0.1);color:#0078d4;"><i class="fa fa-robot"></i></div><div><h4>Azure Machine Learning</h4><p>AutoML, MLOps pipelines, and managed compute clusters for every ML workload.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(0,120,212,0.1);color:#0078d4;"><i class="fa fa-cubes"></i></div><div><h4>AKS & Container Apps</h4><p>Managed Kubernetes and serverless containers with KEDA-based auto-scaling.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(0,120,212,0.1);color:#0078d4;"><i class="fa fa-chart-bar"></i></div><div><h4>Synapse & Fabric</h4><p>Unified analytics platform combining data warehousing, Spark, and Power BI.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(0,120,212,0.1);color:#0078d4;"><i class="fa fa-lock"></i></div><div><h4>Entra ID & Zero Trust</h4><p>Identity-first security with Conditional Access, PIM, and Microsoft Defender.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(0,120,212,0.1);color:#0078d4;"><i class="fa fa-infinity"></i></div><div><h4>Azure DevOps & GitHub</h4><p>End-to-end DevSecOps pipelines with boards, repos, pipelines, and artifact management.</p></div></div>
+      </div>
+    </div>
+
+    <!-- GCP Panel -->
+    <div class="cloud-panel" id="panel-gcp">
+      <div class="cloud-services-grid">
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(66,133,244,0.1);color:#4285f4;"><i class="fa fa-star"></i></div><div><h4>Vertex AI & Gemini</h4><p>Google's unified AI platform with access to Gemini, PaLM, and custom model training.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(66,133,244,0.1);color:#4285f4;"><i class="fa fa-database"></i></div><div><h4>BigQuery & Analytics</h4><p>Serverless, massively scalable data warehouse with ML built-in via BQML.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(66,133,244,0.1);color:#4285f4;"><i class="fa fa-cubes"></i></div><div><h4>GKE & Anthos</h4><p>Industry-leading Kubernetes engine and hybrid/multi-cloud management with Anthos.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(66,133,244,0.1);color:#4285f4;"><i class="fa fa-network-wired"></i></div><div><h4>Cloud Spanner & Firestore</h4><p>Globally distributed, strongly consistent databases for mission-critical applications.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(66,133,244,0.1);color:#4285f4;"><i class="fa fa-broadcast-tower"></i></div><div><h4>Pub/Sub & Dataflow</h4><p>Real-time data streaming and batch ETL pipelines at petabyte scale.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon" style="background:rgba(66,133,244,0.1);color:#4285f4;"><i class="fa fa-map-pin"></i></div><div><h4>Maps Platform & Workspace</h4><p>Google Maps APIs and Workspace automation to enhance operational applications.</p></div></div>
+      </div>
+    </div>
+
+    <!-- Multi-cloud Panel -->
+    <div class="cloud-panel" id="panel-multi">
+      <div class="cloud-services-grid">
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-layer-group"></i></div><div><h4>Multi-Cloud Architecture</h4><p>Design cloud-agnostic systems that leverage the best of AWS, Azure, and GCP simultaneously.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-file-code"></i></div><div><h4>Terraform & Pulumi</h4><p>Provider-agnostic IaC that provisions and manages infrastructure across all clouds from a single codebase.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-eye"></i></div><div><h4>Unified Observability</h4><p>Datadog, Grafana, and OpenTelemetry for cross-cloud metrics, tracing, and logging.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-dollar-sign"></i></div><div><h4>FinOps & Cost Management</h4><p>Apptio, CloudHealth, and custom dashboards to optimize spend across every provider.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-shield-halved"></i></div><div><h4>Cloud-Agnostic Security</h4><p>CSPM, CWPP, and SIEM solutions that work consistently across your entire cloud estate.</p></div></div>
+        <div class="cloud-service-item"><div class="csi-icon"><i class="fa fa-arrows-rotate"></i></div><div><h4>Disaster Recovery</h4><p>Multi-cloud DR strategies with RPO/RTO SLA guarantees and automated failover testing.</p></div></div>
+      </div>
+    </div>
+
+    <!-- Partner badges -->
+    <div class="partner-badges fade-in" style="margin-top:64px;">
+      <div class="partner-badge aws"><i class="fa-brands fa-aws"></i> AWS Advanced Partner</div>
+      <div class="partner-badge azure"><i class="fa-brands fa-microsoft"></i> Azure Solutions Partner</div>
+      <div class="partner-badge gcp"><i class="fa-brands fa-google"></i> Google Cloud Partner</div>
+      <div class="partner-badge openai"><i class="fa fa-brain"></i> OpenAI API Partner</div>
+      <div class="partner-badge anthropic"><i class="fa fa-robot"></i> Anthropic Partner</div>
+      <div class="partner-badge databricks"><i class="fa fa-fire"></i> Databricks Partner</div>
+      <div class="partner-badge nvidia"><i class="fa fa-microchip"></i> NVIDIA DGX Cloud</div>
+      <div class="partner-badge sf"><i class="fa-brands fa-salesforce"></i> Salesforce Partner</div>
+      <div class="partner-badge hf"><i class="fa fa-code"></i> Hugging Face Partner</div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ============================================================ PROCESS ============================================================ -->
+<section id="process" class="section">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="tag"><i class="fa fa-map"></i> Our Approach</div>
+      <h2>How We <span class="grad-text">Deliver</span> Results</h2>
+      <p>A proven engagement model that takes you from discovery to deployment — with full transparency at every step.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-in">
+        <div class="step-num">01</div>
+        <h4>Discovery & Assessment</h4>
+        <p>We map your current landscape, identify opportunities, and define success metrics through workshops and technical interviews.</p>
+      </div>
+      <div class="process-step fade-in fade-in-delay-1">
+        <div class="step-num">02</div>
+        <h4>Strategy & Architecture</h4>
+        <p>Our architects design a scalable, secure solution blueprint aligned with your business goals and technology constraints.</p>
+      </div>
+      <div class="process-step fade-in fade-in-delay-2">
+        <div class="step-num">03</div>
+        <h4>Build & Iterate</h4>
+        <p>Agile sprints with continuous delivery, daily standups, and weekly stakeholder demos ensure we build what you actually need.</p>
+      </div>
+      <div class="process-step fade-in fade-in-delay-3">
+        <div class="step-num">04</div>
+        <h4>Launch & Optimize</h4>
+        <p>Production deployment with full monitoring, documentation, team training, and ongoing optimization powered by data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ============================================================ TECHNOLOGIES ============================================================ -->
+<section id="technologies" class="section">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="tag"><i class="fa fa-layer-group"></i> Tech Stack</div>
+      <h2>Our Technology <span class="grad-text">Ecosystem</span></h2>
+      <p>We're tool-agnostic and technology-fluent — we pick the right stack for each challenge.</p>
+    </div>
+
+    <div class="tech-categories">
+      <div class="tech-category fade-in">
+        <h4>AI & Machine Learning</h4>
+        <div class="tech-list">
+          <div class="tech-chip"><i class="fa fa-brain"></i> PyTorch</div>
+          <div class="tech-chip"><i class="fa fa-brain"></i> TensorFlow</div>
+          <div class="tech-chip"><i class="fa fa-robot"></i> LangChain</div>
+          <div class="tech-chip"><i class="fa fa-robot"></i> LlamaIndex</div>
+          <div class="tech-chip"><i class="fa fa-database"></i> Pinecone</div>
+          <div class="tech-chip"><i class="fa fa-database"></i> Weaviate</div>
+          <div class="tech-chip"><i class="fa fa-database"></i> Qdrant</div>
+          <div class="tech-chip"><i class="fa fa-chart-line"></i> MLflow</div>
+          <div class="tech-chip"><i class="fa fa-chart-line"></i> Weights & Biases</div>
+          <div class="tech-chip"><i class="fa fa-microchip"></i> CUDA / cuDNN</div>
+          <div class="tech-chip"><i class="fa fa-code"></i> Hugging Face</div>
+          <div class="tech-chip"><i class="fa fa-cogs"></i> AutoML</div>
+          <div class="tech-chip"><i class="fa fa-project-diagram"></i> Ray</div>
+          <div class="tech-chip"><i class="fa fa-fire"></i> Spark MLlib</div>
+        </div>
+      </div>
+      <div class="tech-category fade-in">
+        <h4>Cloud & Infrastructure</h4>
+        <div class="tech-list">
+          <div class="tech-chip"><i class="fa-brands fa-aws"></i> AWS</div>
+          <div class="tech-chip"><i class="fa-brands fa-microsoft"></i> Azure</div>
+          <div class="tech-chip"><i class="fa-brands fa-google"></i> GCP</div>
+          <div class="tech-chip"><i class="fa-brands fa-docker"></i> Docker</div>
+          <div class="tech-chip"><i class="fa fa-ship"></i> Kubernetes</div>
+          <div class="tech-chip"><i class="fa fa-code-branch"></i> Terraform</div>
+          <div class="tech-chip"><i class="fa fa-code-branch"></i> Pulumi</div>
+          <div class="tech-chip"><i class="fa fa-play"></i> Ansible</div>
+          <div class="tech-chip"><i class="fa fa-infinity"></i> ArgoCD</div>
+          <div class="tech-chip"><i class="fa fa-infinity"></i> GitHub Actions</div>
+          <div class="tech-chip"><i class="fa fa-chart-area"></i> Prometheus</div>
+          <div class="tech-chip"><i class="fa fa-chart-area"></i> Grafana</div>
+          <div class="tech-chip"><i class="fa fa-search"></i> Datadog</div>
+          <div class="tech-chip"><i class="fa fa-bars"></i> OpenTelemetry</div>
+        </div>
+      </div>
+      <div class="tech-category fade-in">
+        <h4>Backend & Data</h4>
+        <div class="tech-list">
+          <div class="tech-chip"><i class="fa-brands fa-python"></i> Python</div>
+          <div class="tech-chip"><i class="fa-brands fa-node-js"></i> Node.js</div>
+          <div class="tech-chip"><i class="fa fa-code"></i> Go</div>
+          <div class="tech-chip"><i class="fa fa-code"></i> Java / Spring</div>
+          <div class="tech-chip"><i class="fa fa-fire"></i> Apache Spark</div>
+          <div class="tech-chip"><i class="fa fa-fire"></i> Kafka</div>
+          <div class="tech-chip"><i class="fa fa-database"></i> PostgreSQL</div>
+          <div class="tech-chip"><i class="fa fa-database"></i> MongoDB</div>
+          <div class="tech-chip"><i class="fa fa-database"></i> Redis</div>
+          <div class="tech-chip"><i class="fa fa-snowflake"></i> Snowflake</div>
+          <div class="tech-chip"><i class="fa fa-table"></i> dbt</div>
+          <div class="tech-chip"><i class="fa fa-table"></i> Airflow</div>
+        </div>
+      </div>
+      <div class="tech-category fade-in">
+        <h4>Frontend & Mobile</h4>
+        <div class="tech-list">
+          <div class="tech-chip"><i class="fa-brands fa-react"></i> React</div>
+          <div class="tech-chip"><i class="fa-brands fa-react"></i> Next.js</div>
+          <div class="tech-chip"><i class="fa-brands fa-vuejs"></i> Vue.js</div>
+          <div class="tech-chip"><i class="fa fa-mobile"></i> React Native</div>
+          <div class="tech-chip"><i class="fa fa-mobile"></i> Flutter</div>
+          <div class="tech-chip"><i class="fa-brands fa-angular"></i> Angular</div>
+          <div class="tech-chip"><i class="fa-brands fa-js"></i> TypeScript</div>
+          <div class="tech-chip"><i class="fa fa-paint-brush"></i> TailwindCSS</div>
+          <div class="tech-chip"><i class="fa fa-cube"></i> Three.js</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ============================================================ TESTIMONIALS ============================================================ -->
+<section id="testimonials" class="section">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="tag"><i class="fa fa-star"></i> Social Proof</div>
+      <h2>What Our <span class="grad-text">Clients Say</span></h2>
+      <p>Don't take our word for it — here's what real clients have experienced working with Plan Infinity.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <div class="quote-icon">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Working with Plan Infinity Inc. has saved us tons of development time when building our new projects, web apps and websites! We saved time, money and received great quality products from them!</p>
+        <div class="testimonial-author">
+          <img src="./Plan Infinity Inc._files/01.jpg" alt="Tom Atlin">
+          <div>
+            <div class="author-name">Tom Atlin</div>
+            <div class="author-role">CTO, Startup Ventures</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in fade-in-delay-1">
+        <div class="quote-icon">"</div>
+        <div class="stars">★★★★★</div>
+        <p>We used Plan Infinity's services and ran into a few problems in the AWS environment, but they were resolved quickly by their team. Their cloud expertise is unmatched. Thank you guys!</p>
+        <div class="testimonial-author">
+          <img src="./Plan Infinity Inc._files/02.jpg" alt="Brad Jones">
+          <div>
+            <div class="author-name">Brad Jones</div>
+            <div class="author-role">VP Engineering, TechCorp</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in fade-in-delay-2">
+        <div class="quote-icon">"</div>
+        <div class="stars">★★★★★</div>
+        <p>I cannot thank you guys enough for the successful delivery of the Water Link project! It was not possible without your knowledgeable and super hard working team. Exceptional delivery!</p>
+        <div class="testimonial-author">
+          <img src="./Plan Infinity Inc._files/04.jpg" alt="Melissa Norton">
+          <div>
+            <div class="author-name">Melissa Norton</div>
+            <div class="author-role">Director, Water Link Solutions</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="quote-icon">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Plan Infinity built our entire AI recommendation engine from scratch. The model accuracy exceeded our targets by 18% and the deployment was seamless. Truly world-class AI engineering.</p>
+        <div class="testimonial-author">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;color:var(--bg);border:2px solid var(--border-active);">S</div>
+          <div>
+            <div class="author-name">Sarah Chen</div>
+            <div class="author-role">Head of AI, RetailPlatform Inc.</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in fade-in-delay-1">
+        <div class="quote-icon">"</div>
+        <div class="stars">★★★★★</div>
+        <p>The Terraform infrastructure they built reduced our AWS costs by 40%. Their FinOps consulting paid for itself in the first month. Highly recommend their cloud optimization services.</p>
+        <div class="testimonial-author">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--cyan));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;color:var(--bg);border:2px solid var(--border-active);">M</div>
+          <div>
+            <div class="author-name">Marcus Williams</div>
+            <div class="author-role">CFO, CloudFirst Media</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in fade-in-delay-2">
+        <div class="quote-icon">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Their RAG-based document intelligence system transformed how our legal team works. Document review time dropped by 70%. The AI solution was delivered on time and on budget.</p>
+        <div class="testimonial-author">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--purple));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;color:var(--bg);border:2px solid var(--border-active);">R</div>
+          <div>
+            <div class="author-name">Rachel Kim</div>
+            <div class="author-role">General Counsel, LegalTech Group</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ============================================================ PAYMENTS ============================================================ -->
+<section id="payments" class="section">
+  <div class="container">
+    <div class="payments-layout">
+      <div class="payments-info fade-in">
+        <div class="tag"><i class="fa-brands fa-paypal"></i> Secure Payments</div>
+        <h2>Simple, Secure<br><span class="grad-text">Invoice Payments</span></h2>
+        <p>We believe in making business easy. Pay your invoices instantly and securely via PayPal — no account required, all major credit cards accepted.</p>
+        <div class="payment-features">
+          <div class="payment-feature"><i class="fa fa-check-circle"></i> Instant payment confirmation</div>
+          <div class="payment-feature"><i class="fa fa-check-circle"></i> All major credit &amp; debit cards accepted</div>
+          <div class="payment-feature"><i class="fa fa-check-circle"></i> 256-bit SSL encryption</div>
+          <div class="payment-feature"><i class="fa fa-check-circle"></i> PayPal Buyer &amp; Seller protection</div>
+          <div class="payment-feature"><i class="fa fa-check-circle"></i> Automatic receipt to your email</div>
+          <div class="payment-feature"><i class="fa fa-check-circle"></i> No hidden fees or surcharges</div>
+        </div>
+        <p style="font-size:13px; color:var(--text3);">For wire transfers, ACH, or custom payment arrangements, please <a href="#contact" style="color:var(--cyan);">contact us directly</a>.</p>
+      </div>
+      <div class="fade-in fade-in-delay-1">
+        <div class="payment-card">
+          <div class="paypal-logo"><span>Pay</span><span>Pal</span></div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:20px;font-family:var(--font-mono);">BUSINESS PAYMENTS PORTAL</div>
+          <div class="payment-desc">
+            Click below to securely pay your invoice or retainer through our official PayPal business portal. Include your invoice number in the payment note.
+          </div>
+          <div class="payment-email">planinfinityinc@gmail.com</div>
+          <a href="https://www.paypal.biz/planinfinityinc" target="_blank" rel="noopener" class="btn btn-paypal" style="width:100%;justify-content:center;">
+            <i class="fa-brands fa-paypal"></i> Pay Now via PayPal
+          </a>
+          <div class="accepted-methods">
+            <div class="method-chip">Visa</div>
+            <div class="method-chip">Mastercard</div>
+            <div class="method-chip">Amex</div>
+            <div class="method-chip">Discover</div>
+            <div class="method-chip">PayPal</div>
+            <div class="method-chip">Venmo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ============================================================ CONTACT ============================================================ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-layout">
+      <div class="contact-info fade-in">
+        <div class="tag"><i class="fa fa-envelope"></i> Get In Touch</div>
+        <h2>Let's Build<br><span class="grad-text">Something Great</span></h2>
+        <p>Ready to transform your business with AI and cloud? Drop us a message and our team will respond within one business day.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="cd-icon"><i class="fa fa-location-dot"></i></div>
+            <div class="cd-text">
+              <div class="label">Address</div>
+              <div class="value">10006 Cross Creek Blvd. Ste 148<br>Tampa FL, 33647</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="cd-icon"><i class="fa fa-phone"></i></div>
+            <div class="cd-text">
+              <div class="label">Phone</div>
+              <div class="value"><a href="tel:+19045697483" style="color:var(--text);text-decoration:none;">+1 904 569 7483</a></div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="cd-icon"><i class="fa fa-envelope"></i></div>
+            <div class="cd-text">
+              <div class="label">Email</div>
+              <div class="value"><a href="mailto:contact@planinfinity.com" style="color:var(--cyan);text-decoration:none;">contact@planinfinity.com</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://facebook.com" target="_blank" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://twitter.com" target="_blank" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://youtube.com" target="_blank" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://github.com" target="_blank" class="social-link"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <div class="fade-in fade-in-delay-1">
+        <div class="contact-form-wrap">
+          <h3>Send Us a Message</h3>
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" placeholder="John" required>
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" placeholder="Doe" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="john@company.com" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone (Optional)</label>
+                <input type="tel" id="phone" name="phone" placeholder="+1 (000) 000-0000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="service">Service of Interest</label>
+              <select id="service" name="service">
+                <option value="">Select a service...</option>
+                <option>Generative AI / LLM Integration</option>
+                <option>AI Agents & Automation</option>
+                <option>Custom ML / Deep Learning</option>
+                <option>AWS Cloud Solutions</option>
+                <option>Azure Cloud Solutions</option>
+                <option>Google Cloud Solutions</option>
+                <option>Multi-Cloud Architecture</option>
+                <option>Web & Mobile App Development</option>
+                <option>Data Engineering & Analytics</option>
+                <option>Cybersecurity</option>
+                <option>Managed IT Services</option>
+                <option>IT Consulting & Strategy</option>
+                <option>DevOps / MLOps</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="budget">Project Budget</label>
+              <select id="budget" name="budget">
+                <option value="">Select budget range...</option>
+                <option>Under $10,000</option>
+                <option>$10,000 – $25,000</option>
+                <option>$25,000 – $50,000</option>
+                <option>$50,000 – $100,000</option>
+                <option>$100,000 – $250,000</option>
+                <option>$250,000+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your project, goals, and timeline..." required></textarea>
+            </div>
+
+            <!-- Google reCAPTCHA v2 -->
+            <div class="recaptcha-wrap">
+              <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" data-theme="dark"></div>
+            </div>
+            <p style="font-size:11px;color:var(--text3);margin-bottom:16px;">
+              ⚠️ Replace the reCAPTCHA site key above with your key from <a href="https://www.google.com/recaptcha/admin" target="_blank" style="color:var(--cyan);">Google reCAPTCHA Admin</a>.
+            </p>
+
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:16px;">
+              <i class="fa fa-paper-plane"></i> Send Message
+            </button>
+            <div class="form-note">Your information is encrypted and never shared with third parties.</div>
+            <div class="form-success" id="formSuccess">
+              <i class="fa fa-check-circle" style="font-size:24px;margin-bottom:8px;display:block;"></i>
+              <strong>Message sent!</strong><br>We'll get back to you within one business day.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FOOTER ============================================================ -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo">
+          <div class="nav-logo-icon"><i class="fa fa-infinity"></i></div>
+          Plan Infinity Inc.
+        </a>
+        <p>Your trusted AI-first IT consultancy. We build the future with artificial intelligence, cloud infrastructure, and world-class engineering.</p>
+        <div class="social-links">
+          <a href="https://facebook.com" target="_blank" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://twitter.com" target="_blank" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://youtube.com" target="_blank" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Web & Mobile Dev</a></li>
+          <li><a href="#services">Data Analytics</a></li>
+          <li><a href="#services">Custom Software</a></li>
+          <li><a href="#services">IT Consulting</a></li>
+          <li><a href="#services">Cybersecurity</a></li>
+          <li><a href="#services">Managed IT</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>AI & Cloud</h5>
+        <ul>
+          <li><a href="#ai-offerings">Generative AI</a></li>
+          <li><a href="#ai-offerings">RAG Systems</a></li>
+          <li><a href="#ai-offerings">LLM Fine-tuning</a></li>
+          <li><a href="#cloud">AWS Solutions</a></li>
+          <li><a href="#cloud">Azure Solutions</a></li>
+          <li><a href="#cloud">Google Cloud</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#payments">Payments</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="mailto:contact@planinfinity.com">Email Us</a></li>
+          <li><a href="https://www.paypal.biz/planinfinityinc" target="_blank">Pay Invoice</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Plan Infinity Inc. All rights reserved. | <a href="#contact">Tampa, FL 33647</a></p>
+      <p><a href="tel:+19045697483">+1 904 569 7483</a> · <a href="mailto:contact@planinfinity.com">contact@planinfinity.com</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================ SCRIPTS ============================================================ -->
+<script>
+// ── Nav scroll behavior ──────────────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ── Hamburger ────────────────────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  mobileNav.classList.toggle('open');
+});
+document.querySelectorAll('.mobile-link').forEach(l => {
+  l.addEventListener('click', () => mobileNav.classList.remove('open'));
+});
+
+// ── Intersection observer for fade-in ────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── Cloud tabs ────────────────────────────────────────────────────
+function switchTab(id, btn) {
+  document.querySelectorAll('.cloud-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.cloud-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Smooth scroll for all anchor links ───────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+      mobileNav.classList.remove('open');
+    }
+  });
+});
+
+// ── Contact form handler ──────────────────────────────────────────
+function handleSubmit(e) {
+  e.preventDefault();
+  
+  // Check reCAPTCHA
+  const recaptchaResponse = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : null;
+  // Note: In production, verify on server-side. For demo, we check client-side.
+  
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  const btn = form.querySelector('button[type="submit"]');
+  
+  // Simulate sending (replace with real fetch/email integration)
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending...';
+  
+  setTimeout(() => {
+    success.style.display = 'block';
+    btn.innerHTML = '<i class="fa fa-check"></i> Message Sent!';
+    btn.style.background = 'linear-gradient(135deg, var(--green), var(--cyan))';
+    form.querySelectorAll('input, textarea, select').forEach(el => el.value = '');
+    if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+    
+    setTimeout(() => {
+      success.style.display = 'none';
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa fa-paper-plane"></i> Send Message';
+      btn.style.background = '';
+    }, 5000);
+  }, 1500);
+}
+
+// ── Stagger cards on load ─────────────────────────────────────────
+document.querySelectorAll('.service-card, .ai-card, .model-badge, .cloud-service-item').forEach((el, i) => {
+  el.style.transitionDelay = `${(i % 6) * 0.05}s`;
+});
+</script>
+
+</body>
+</html>
